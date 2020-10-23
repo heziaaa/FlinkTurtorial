@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.atguigu</groupId>
-    <artifactId>FlinkTurtorial</artifactId>
+    <artifactId>FlinkTutorial</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
@@ -16,6 +16,11 @@
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.12</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka-0.11_2.12</artifactId>
             <version>1.10.1</version>
         </dependency>
     </dependencies>

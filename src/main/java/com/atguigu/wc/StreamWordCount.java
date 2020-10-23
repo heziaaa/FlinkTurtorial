@@ -24,6 +24,7 @@ public class StreamWordCount {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
+//        env.disableOperatorChaining();
 
         // 从文件读取数据，用一个DataSet来接收
 //        String inputPath = "D:\\Projects\\BigData\\FlinkTurtorial\\src\\main\\resources\\hello.txt";
@@ -33,13 +34,13 @@ public class StreamWordCount {
         ParameterTool parameterTool = ParameterTool.fromArgs(args);
         String host = parameterTool.get("host");
         int port = parameterTool.getInt("port");
-        DataStream<String> inputDataStream = env.socketTextStream(host, port);
+        DataStream<String> inputDataStream = env.socketTextStream(host, port).slotSharingGroup("1");
 
         // 先切分单词，然后分组统计
         DataStream<Tuple2<String, Integer>> resultDataStream = inputDataStream
                 .flatMap(new WordCount.MyFlatMapper()).setParallelism(3)
                 .keyBy(0)
-                .sum(1);
+                .sum(1).slotSharingGroup("2").startNewChain();
 
         resultDataStream.print();
 
