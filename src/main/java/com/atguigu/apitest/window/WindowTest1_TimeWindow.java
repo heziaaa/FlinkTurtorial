@@ -52,8 +52,8 @@ public class WindowTest1_TimeWindow {
                 })
                 .keyBy(data -> data.f0)
 //                .window(TumblingEventTimeWindows.of(Time.seconds(15)))
-//                .window(ProcessingTimeSessionWindows.withGap(Time.minutes(1)))
-                .timeWindow(Time.seconds(15))
+                .window(ProcessingTimeSessionWindows.withGap(Time.minutes(1)))
+//                .timeWindow(Time.seconds(15))
                 .minBy(1);
 
         resultStream.print();
